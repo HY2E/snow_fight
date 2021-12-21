@@ -20,7 +20,7 @@
 [Aa]ssets/Plugins/Editor/JetBrains*
 
 #.DS_store
-.DS_store
+.DS_Store
 
 # Visual Studio cache directory
 .vs/
