@@ -9,6 +9,8 @@ public class make_circle : MonoBehaviour
     public GameObject num;
 
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +29,9 @@ public class make_circle : MonoBehaviour
             {
                 continue;
             }
+
             num_object[i] = (GameObject)Instantiate(Circle, new Vector2((float)-8.01 + j, (float)(2.52 - k)), Quaternion.identity);
+
             num_object[i] = (GameObject)Instantiate(num, new Vector2((float)-8.01 + j, (float)(2.52 - k)), Quaternion.identity);
         }
 
