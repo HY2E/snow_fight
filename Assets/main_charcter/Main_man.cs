@@ -7,18 +7,22 @@ public class Main_man : MonoBehaviour
 
     public GameObject obMainMan;
     public GameObject snow;
+    public GameObject eattack;
     public GameObject obenemy;
     public bool attacked = false;
-    public bool state = false;
+    public bool eattacked = false;
     public int count = 0;
+    public int ecount = 0;
     private float hit;
     public float x;
-    public float distancee;
     public float y;
     public float z;
+    public float ex;
+    public float ey;
+    public float ez;
     private float dest;
-    private float spd;
     Vector3 target;
+    Vector3 etarget;
     Animator animator;
 
     // Start is called before the first frame update
@@ -28,21 +32,21 @@ public class Main_man : MonoBehaviour
         x = obenemy.transform.position.x;
         y = obenemy.transform.position.y;
         z = obenemy.transform.position.z;
+        ex = obMainMan.transform.position.x;
+        ey = obMainMan.transform.position.y;
+        ez = obMainMan.transform.position.z;
+        
         target = new Vector3(x,y,z);
-        dest = obenemy.transform.position.x+3;
+        etarget = new Vector3(ex,ey,ez);
         animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        
         if (Input.GetKeyDown(KeyCode.A) &&
         ! animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
-            
-            state = false;
             animator.SetTrigger("attack");
             attacked = true;
             animator.SetBool("move",true);
@@ -51,46 +55,66 @@ public class Main_man : MonoBehaviour
             y = obenemy.transform.position.y;
             z = obenemy.transform.position.z;
             target = new Vector3(x,y,z);
-            count += 1;
-            
+            count += 1;    
         }
         
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Run")){
             snow.transform.position = Vector3.MoveTowards(snow.transform.position,target, 10f* Time.deltaTime);
-            // spd = (x - obMainMan.transform.position.x)/10f* Time.deltaTime+0.7f;
-            // Invoke("setState",spd);
             if(count == 10){
                 animator.SetBool("isDie",true);
             }
         }
-        
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("HitE")){
             if(count %3 == 0){
                 snow.transform.position = new Vector3(obMainMan.transform.position.x,obMainMan.transform.position.y,obMainMan.transform.position.z);    
-                obenemy.transform.position = new Vector3(x+1,y,z);
-                
+                obenemy.transform.position = new Vector3(x+1,y,z);   
             }
-            
-            
         }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")){
             snow.transform.position = new Vector3(obMainMan.transform.position.x,obMainMan.transform.position.y,obMainMan.transform.position.z);    
         }attacked = false;
-
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Die")){
             Invoke("dieenemy",1f);
         }
+        if (Input.GetKeyDown(KeyCode.B) &&
+        ! animator.GetCurrentAnimatorStateInfo(0).IsName("EAttack"))
+        {    
+            animator.SetTrigger("eattack");
+            eattacked = true;
+            // enemy.attacked = true;
+            ex = obMainMan.transform.position.x;
+            ey = obMainMan.transform.position.y;
+            ez = obMainMan.transform.position.z;
+            etarget = new Vector3(ex,ey,ez);
+            ecount += 1;    
+        }
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ERun")){
+            eattack.transform.position = Vector3.MoveTowards(eattack.transform.position,etarget, 10f* Time.deltaTime);
+            if(ecount == 10){
+                animator.SetBool("pDie",true);
+            }
+        }
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Hit")){
+            if(ecount %3 == 0){
+                obenemy.transform.position = new Vector3(x,y,z);
+                eattack.transform.position = new Vector3(x,y,z);
+                obMainMan.transform.position = new Vector3(ex-1,ey,ez);   
+            }
+        }
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")){
+            eattack.transform.position = new Vector3(obenemy.transform.position.x,obenemy.transform.position.y,obenemy.transform.position.z);    
+        }eattacked = false;
         
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("PDie")){
+            Invoke("dieplayer",1f);
+        }
     }
+    
     void dieenemy(){
         Destroy(obenemy);
     }
-
-    public int getCount(){
-        return count;
+    void dieplayer(){
+        Destroy(obMainMan);
     }
 
-    public bool Attack(){
-        return attacked;
-    }
 }
