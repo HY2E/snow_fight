@@ -36,7 +36,7 @@ public class Main_man : MonoBehaviour
         ey = obMainMan.transform.position.y;
         ez = obMainMan.transform.position.z;
         timer = 0;
-        watingTime = 10;
+        watingTime = 10; // 몬스터 공격 속도 조정
         target = new Vector3(x,y,z);
         etarget = new Vector3(ex,ey,ez);
         animator = GetComponent<Animator>();
@@ -63,16 +63,16 @@ public class Main_man : MonoBehaviour
         }
         
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Run")){
-            snow.transform.position = Vector3.MoveTowards(snow.transform.position,target, 10f* Time.deltaTime);
+            snow.transform.position = Vector3.MoveTowards(snow.transform.position,target, 30f* Time.deltaTime);
             if(count == 10){
                 animator.SetBool("isDie",true);
             }
         }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("HitE")){
-            if(count %3 == 0){
-                snow.transform.position = new Vector3(obMainMan.transform.position.x,obMainMan.transform.position.y,obMainMan.transform.position.z);    
-                obenemy.transform.position = new Vector3(x+1,y,z);   
-            }
+            // if(count %1 == 0){
+            snow.transform.position = new Vector3(obMainMan.transform.position.x,obMainMan.transform.position.y,obMainMan.transform.position.z);    
+            obenemy.transform.position = new Vector3(x+1,y,z);   
+            // }
         }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")){
             snow.transform.position = new Vector3(obMainMan.transform.position.x,obMainMan.transform.position.y,obMainMan.transform.position.z);    
@@ -100,11 +100,11 @@ public class Main_man : MonoBehaviour
             }
         }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Hit")){
-            if(ecount %3 == 0){
-                obenemy.transform.position = new Vector3(x,y,z);
-                eattack.transform.position = new Vector3(x,y,z);
-                obMainMan.transform.position = new Vector3(ex-1,ey,ez);   
-            }
+            // if(ecount %1 == 0){
+            obenemy.transform.position = new Vector3(x+1,y,z);
+            eattack.transform.position = new Vector3(x,y,z);
+            obMainMan.transform.position = new Vector3(ex-1,ey,ez);   
+            // }
         }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")){
             eattack.transform.position = new Vector3(obenemy.transform.position.x,obenemy.transform.position.y,obenemy.transform.position.z);    

@@ -398,10 +398,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 997055922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b5129f5e57d44e86978a8b824c5217e, type: 3}
+  m_Script: {fileID: 11500000, guid: a4dd2ede11a4c4f03864f6cbabd242db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  getCamera: {fileID: 394834517}
+  MousePosition: {x: 0, y: 0}
 --- !u!4 &997055924
 Transform:
   m_ObjectHideFlags: 0
@@ -521,11 +521,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1089102651}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a537328e885042ae90c340ce7bdb548, type: 3}
+  m_Script: {fileID: 11500000, guid: 9802f985e6b8e4393a8848e84f5305ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   num: {fileID: 1089102652}
-  make: {fileID: 0}
+  make: {fileID: 1249590637}
 --- !u!1 &1249590636
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,10 +899,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1249590636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cbf960f705be42db8db1c8325eaadd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5811054f094f64d4f86c595ca391a78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   arr:
+  - {fileID: 1089102651}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1038,7 +1039,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
+  tf: 0
+  pos_x: 0
+  pos_y: 0
 --- !u!1 &1365967871 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 877625599548681718, guid: 890e8c22d6d694746b5b08122ef82454, type: 3}
