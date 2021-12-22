@@ -13,14 +13,14 @@ public class Main_man : MonoBehaviour
     public bool eattacked = false;
     public int count = 0;
     public int ecount = 0;
-    private float hit;
     public float x;
     public float y;
     public float z;
     public float ex;
     public float ey;
     public float ez;
-    private float dest;
+    float timer;
+    int watingTime;
     Vector3 target;
     Vector3 etarget;
     Animator animator;
@@ -35,7 +35,8 @@ public class Main_man : MonoBehaviour
         ex = obMainMan.transform.position.x;
         ey = obMainMan.transform.position.y;
         ez = obMainMan.transform.position.z;
-        
+        timer = 0;
+        watingTime = 10;
         target = new Vector3(x,y,z);
         etarget = new Vector3(ex,ey,ez);
         animator = GetComponent<Animator>();
@@ -44,6 +45,9 @@ public class Main_man : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
+
+        // 공격 패턴 바꾸기 Input 지우고 대체
         if (Input.GetKeyDown(KeyCode.A) &&
         ! animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
@@ -76,7 +80,7 @@ public class Main_man : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Die")){
             Invoke("dieenemy",1f);
         }
-        if (Input.GetKeyDown(KeyCode.B) &&
+        if (timer > watingTime &&
         ! animator.GetCurrentAnimatorStateInfo(0).IsName("EAttack"))
         {    
             animator.SetTrigger("eattack");
@@ -86,7 +90,8 @@ public class Main_man : MonoBehaviour
             ey = obMainMan.transform.position.y;
             ez = obMainMan.transform.position.z;
             etarget = new Vector3(ex,ey,ez);
-            ecount += 1;    
+            ecount += 1;
+            timer = 0;
         }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("ERun")){
             eattack.transform.position = Vector3.MoveTowards(eattack.transform.position,etarget, 10f* Time.deltaTime);
