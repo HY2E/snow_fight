@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class make_circle : MonoBehaviour
 {
-    public GameObject[] num_object = new GameObject[136];
+    public GameObject[] num_object_circle = new GameObject[136];
+    public GameObject[] num_object_number = new GameObject[136];
     public GameObject Circle;
     public GameObject num;
 
@@ -18,7 +19,6 @@ public class make_circle : MonoBehaviour
         int k = 0;
         for (int i = 0; i < 136; i++)
         {
-
             if (i % 8 == 0 && i != 0)
             {
                 j++;
@@ -29,11 +29,28 @@ public class make_circle : MonoBehaviour
             {
                 continue;
             }
-
-            num_object[i] = (GameObject)Instantiate(Circle, new Vector2((float)-8.01 + j, (float)(2.52 - k)), Quaternion.identity);
-
-            num_object[i] = (GameObject)Instantiate(num, new Vector2((float)-8.01 + j, (float)(2.52 - k)), Quaternion.identity);
+            num_object_circle[i] = (GameObject)Instantiate(Circle, new Vector2((float)-8.01 + j, (float)(2.52 - k)), Quaternion.identity);
         }
+
+        j = 0;
+        k = 0;
+        for (int i = 0; i < 136; i++)
+        {
+            if (i % 8 == 0 && i != 0)
+            {
+                j++;
+                k = 0;
+            }
+            k = i % 8;
+            if (i == 0)
+            {
+                continue;
+            }
+            num_object_number[i] = Instantiate(num, new Vector2((float)-8.01 + j, (float)(2.52 - k)), Quaternion.identity);
+        }
+
+
+
 
     }
 
