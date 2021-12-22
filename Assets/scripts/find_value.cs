@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class remove : MonoBehaviour
+public class find_value : MonoBehaviour
 {
     public GameObject[] arr = new GameObject[136];
     GameObject vec;
@@ -18,13 +18,6 @@ public class remove : MonoBehaviour
 
 
     // Start is called before the first frame update
-
-    void OnMouseDown()
-    {
-
-
-    }
-
     void Start()
     {
 
